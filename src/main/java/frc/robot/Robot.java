@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import com.revrobotics.CANSparkMax;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -19,32 +21,43 @@ public class Robot extends TimedRobot {
   private Joystick m_leftStick;
   private Joystick m_rightStick;
 
-  private final MotorController m_leftMotora = new CANSparkMax(0);
-  private final MotorController m_rightMotora = new CANSparkMax(1);
-  private final MotorController m_leftMotorb = new CANSparkMax(0);
-  private final MotorController m_rightMotorb = new CANSparkMax(1);
-  varname NewLeftMotor = (leftMotora,leftmotorb);
-  varname NewRightMotor = (rightMotora,rightMotorb);
-
-  m_leftmotor = m_leftmotorb(m_leftMotora,leftmotorb);
-  private final SpeedControllerGroup RightSpeedGroup = new SpeedControllerGroup(NewRightMotor);
-  private final SpeedControllerGroup LeftSpeedGroup = new SpeedControllerGroup(NewLeftMotor);
+  /**
+   *
+   */
+  private final CANSparkMax m_leftMotora = new CANSparkMax(0, null);
+  /**
+   *
+   */
+  private final CANSparkMax m_rightMotorb = new CANSparkMax(1, null);
+  /**
+   *
+   */
+  private final CANSparkMax m_leftMotora = new CANSparkMax(0, null);
+  /**
+   *
+   */
+  private final CANSparkMax m_rightMotorb = new CANSparkMax(1, null);
+  new_left_motor = (m_leftMotora, m_leftMotorb);
+  new_right_motor = (m_rightMotora, m_rightMotorb);
+  //speedgroups
+  private final speed_controller_group right_speed_group = new speed_controller_group(new_right_motor);
+  private final speed_controller_group left_speed_group = new speed_controller_group(new_left_motor);
   //drivetrain
-  DifferentialDrive drivetrain = new DifferentialDrive(LeftSpeedGroup,RightSpeedGroup);
+  DifferentialDrive drivetrain = new DifferentialDrive(left_speed_group, right_speed_group);
   //joystick
-varname Joystick stick = new Joysticka(0);
-Joystick stick = new Joystickb(1);
+  Joystick lstick = new Joystick(0);
+  Joystick rstick = new Joystick(1);
+
   @Override
   public void robotInit() {
+    MotorController m_rightMotor;
     // We need to invert one side of the drivetrain so that positive voltages
     // result in both sides moving forward. Depending on how your robot's
     // gearbox is constructed, you might have to invert the left side instead.
-    m_rightMotora.setInverted(true);
-    m_leftMotora.setInverted(isInverted:true);
-    m_leftMotorb.setInverted(isInverted:false);
-    m_rightmotorb.setInverted(isInverted:false);
+    m_rightMotor.setInverted(true);
 
-    m_myRobot = new DifferentialDrive(m_leftMotor, m_rightMotor);
+    MotorController new_leftMotor;
+    m_myRobot = new DifferentialDrive(new_leftMotor, m_rightMotor);
     m_leftStick = new Joystick(0);
     m_rightStick = new Joystick(1);
   }
@@ -52,5 +65,9 @@ Joystick stick = new Joystickb(1);
   @Override
   public void teleopPeriodic() {
     m_myRobot.tankDrive(-m_leftStick.getY(), -m_rightStick.getY());
+        Joystick joystickb;
+        Joystick Joysticka;
+        m_myRobot.tankDrive(Joysticka.getX(), joystickb.getY());
+
   }
 }
