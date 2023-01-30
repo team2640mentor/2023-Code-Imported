@@ -28,25 +28,27 @@ public class Robot extends TimedRobot {
   /**
    *
    */
-  private final CANSparkMax m_rightMotorb = new CANSparkMax(1, null);
+  private final CANSparkMax m_rightMotora = new CANSparkMax(1, null);
   /**
    *
    */
-  private final CANSparkMax m_leftMotora = new CANSparkMax(0, null);
+  private final CANSparkMax m_leftMotorb = new CANSparkMax(0, null);
   /**
    *
    */
   private final CANSparkMax m_rightMotorb = new CANSparkMax(1, null);
+private Object new_right_motor;
   new_left_motor = (m_leftMotora, m_leftMotorb);
   new_right_motor = (m_rightMotora, m_rightMotorb);
   //speedgroups
   private final speed_controller_group right_speed_group = new speed_controller_group(new_right_motor);
+private Object new_left_motor;
   private final speed_controller_group left_speed_group = new speed_controller_group(new_left_motor);
   //drivetrain
   DifferentialDrive drivetrain = new DifferentialDrive(left_speed_group, right_speed_group);
   //joystick
   Joystick lstick = new Joystick(0);
-  Joystick rstick = new Joystick(1);
+  
 
   @Override
   public void robotInit() {
